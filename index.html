@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Lia ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;overflow:hidden;color:#fff;background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);background-size:400% 400%;animation:bg 15s ease infinite}
+@keyframes bg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.slide{display:none;height:100vh;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center}
+.active{display:flex}
+.card{background:rgba(255,255,255,.15);backdrop-filter:blur(12px);padding:25px;border-radius:24px;max-width:850px}
+button{padding:12px 24px;border:none;border-radius:30px;cursor:pointer;margin-top:15px}
+img{max-width:260px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.polaroid{background:#fff;color:#000;padding:10px;border-radius:12px;transform:rotate(-3deg)}
+.fall{position:fixed;top:-20px;animation:fall 8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh);opacity:0}}
+#typing{line-height:1.8}
+.progress{position:fixed;top:0;left:0;height:4px;background:#fff;width:0%;z-index:99}
+.terminal{background:#111;padding:15px;border-radius:12px;text-align:left;color:#00ff88;font-family:monospace}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<audio id="bgm" autoplay loop>
+<source src="foryou.mp3" type="audio/mpeg">
+</audio>
+
+<div class="slide active">
+<div class="card">
+<h1>💌 Surat Untuk Lia</h1>
+<p>Ada sesuatu yang ingin aku tunjukkan...</p>
+<button onclick="startStory()">Buka ❤️</button>
+</div>
+</div>
+
+<div class="slide">
+<div class="card">
+<h2>😂 Tebak-tebakan</h2>
+<p>Siapa yang lagi lihat website ini?</p>
+<button onclick="alert('Salah 😭')">Lia</button>
+<button onclick="alert('Salah 😭')">Lia Cantik</button>
+<button onclick="ok()">Semua Benar 😎</button>
+</div>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto1.jpg">
+<p>🌷 Orang di foto ini berhasil mencuri perhatian tanpa izin.</p>
+</div>
+<button onclick="next()">Lanjut</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto2.jpg">
+<p>✨ Nilai Lia?</p>
+<button onclick="alert('✅ Jawaban diterima')">100/100</button>
+<button onclick="alert('🏆 Semua Benar')">Semua Benar</button>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="card">
+<h2>🤖 AI Lia Detector</h2>
+<div class="terminal" id="scanBox">
+Scanning...
+</div>
+<button onclick="runScan()">Mulai Scan</button>
+</div>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto3.jpg">
+<p>❤️ Siapa yang paling sering aku tunggu chatnya?</p>
+<button onclick="alert('❌ Salah')">Kurir</button>
+<button onclick="alert('❤️ Betul')">Lia</button>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto4.jpg">
+<p>🌙 Kadang notifikasi sederhana bisa bikin hari jadi lebih baik.</p>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto5.jpg">
+<p>🎁 Hadiah Untuk Lia</p>
+<div>
+❤️ Lifetime Support<br>
+📱 Unlimited Chat<br>
+🌷 Prioritas Curhat
+</div>
+</div>
+<button onclick="next()">Pesan Terakhir</button>
+</div>
+
+<div class="slide">
+<div class="card">
+<h2>💝 Untuk Lia</h2>
+<p id="typing"></p>
+<div id="end" style="display:none;margin-top:20px">
+<h3>Terima kasih sudah membaca sampai akhir ❤️</h3><br>
+<p>
+Terima kasih ya, Lia.<br><br>
+Untuk semua cerita, semua tawa, dan semua hal kecil yang tanpa sadar berhasil membuat hari-hariku lebih berwarna.<br><br>
+Aku bersyukur karena pernah mengenal kamu. 🌷❤️
+</p>
+</div>
+</div>
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+
+function updateBar(){
+document.getElementById('progress').style.width=(current/(slides.length-1))*100+'%';
+}
+
+function startStory(){
+document.getElementById('bgm').play().catch(()=>{});
+next();
+}
+
+function next(){
+slides[current].classList.remove('active');
+current++;
+slides[current].classList.add('active');
+updateBar();
+if(current===8) typeText();
+}
+
+function ok(){
+alert('✅ Nah gitu dong 😌');
+next();
+}
+
+function runScan(){
+const box=document.getElementById('scanBox');
+box.innerHTML='Scanning... ██████████ 100%';
+setTimeout(()=>{
+box.innerHTML=`Nama : Lia
+
+Status :
+✓ Baik
+✓ Cantik
+✓ Gemes
+
+Memeriksa bug...`;
+},1200);
+
+setTimeout(()=>{
+box.innerHTML+=`
+
+⚠️ Bug ditemukan
+
+- Overthinking
+- Terlalu mikirin semuanya sendiri
+- Kadang lupa kalau dirinya berharga`;
+},2500);
+
+setTimeout(()=>{
+box.innerHTML+=`
+
+❌ Gagal memperbaiki
+
+Karena itu bukan bug.
+
+Itu cuma bagian dari Lia
+yang membuatnya menjadi dirinya sendiri. 🌷`;
+},4500);
+
+setTimeout(next,6500);
+}
+
+const text=`Kalau suatu hari nanti kamu masih ragu, nggak apa-apa.
+
+Aku nggak akan maksa kamu buat percaya begitu saja.
+
+Aku cuma ingin kamu tahu kalau ada seseorang di sini yang benar-benar peduli sama kamu.
+
+Terima kasih sudah hadir dan memberi warna dalam hari-hariku.
+
+Tetap jadi Lia yang aku kenal ya. 🌷`;
+
+function typeText(){
+let i=0;
+const el=document.getElementById('typing');
+const t=setInterval(()=>{
+el.innerHTML=text.substring(0,i).replace(/\n/g,'<br>');
+i++;
+if(i>text.length){
+clearInterval(t);
+document.getElementById('end').style.display='block';
+}
+},35);
+}
+
+setInterval(()=>{
+let e=document.createElement('div');
+e.className='fall';
+e.innerHTML=Math.random()>0.5?'❤️':'🌸';
+e.style.left=Math.random()*100+'vw';
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),8000);
+},300);
+
+document.addEventListener('click',()=>{
+document.getElementById('bgm').play().catch(()=>{});
+},{once:true});
+</script>
+</body>
+</html>
