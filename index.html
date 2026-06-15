@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Untuk Lia ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;overflow:hidden;color:#fff;background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);background-size:400% 400%;animation:bg 12s ease infinite}
+@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.slide{display:none;height:100vh;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}
+.active{display:flex}
+.card{background:rgba(255,255,255,.15);backdrop-filter:blur(12px);padding:25px;border-radius:24px;max-width:850px}
+button{padding:12px 24px;border:none;border-radius:30px;cursor:pointer;margin-top:15px}
+img{max-width:260px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.polaroid{background:#fff;color:#000;padding:10px;border-radius:12px}
+.progress{position:fixed;top:0;left:0;height:5px;background:#fff;width:0%;z-index:99}
+.star{position:fixed;width:3px;height:3px;background:#fff;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.fall{position:fixed;top:-20px;animation:fall 8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh);opacity:0}}
+#heartGame{position:relative;width:280px;height:180px;border:2px dashed #fff;border-radius:20px}
+#heartBtn{position:absolute;font-size:28px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<audio id="bgm" loop><source src="foryou.mp3" type="audio/mpeg"></audio>
+
+<div class="slide active"><div class="card">
+<h1>💌 Untuk Lia</h1>
+<p>Ada sesuatu yang ingin aku tunjukkan...</p>
+<button onclick="startStory()">Buka Surat ❤️</button>
+</div></div>
+
+<div class="slide"><div class="card">
+<h2>😂 Tebak Tebakan</h2>
+<p>Siapa yang sedang melihat website ini?</p>
+<button onclick="alert('Salah 😭')">Lia</button>
+<button onclick="alert('Masih salah 😭')">Lia Cantik</button>
+<button onclick="correct()">Semua Benar 😎</button>
+</div></div>
+
+<div class="slide"><div class="card">
+<h2>❤️ Tangkap Hatinya</h2>
+<div id="heartGame"><div id="heartBtn" onclick="winGame()">❤️</div></div>
+<p>Klik hati yang bergerak!</p>
+</div></div>
+
+<div class="slide"><div class="polaroid"><img src="foto1.jpg"><p>🌷 Awal Cerita</p></div><button onclick="next()">Next</button></div>
+<div class="slide"><div class="polaroid"><img src="foto2.jpg"><p>✨ Tentang Kamu</p></div><button onclick="next()">Next</button></div>
+<div class="slide"><div class="polaroid"><img src="foto3.jpg"><p>☀️ Hari-Hari Bersama</p></div><button onclick="next()">Next</button></div>
+<div class="slide"><div class="polaroid"><img src="foto4.jpg"><p>🌙 Saat Sulit Datang</p></div><button onclick="next()">Next</button></div>
+<div class="slide"><div class="polaroid"><img src="foto5.jpg"><p>❤️ Bersamamu Kita Akan Jalani Semua</p></div><button onclick="next()">Next</button></div>
+
+<div class="slide"><div class="card">
+<h2>💝 Pesan Untuk Lia</h2>
+<p id="typing"></p>
+<div id="thanks" style="display:none">
+<h3>Terima kasih sudah membaca sampai akhir ❤️</h3>
+<p><b>"Bersamamu, kita akan jalani semua."</b></p>
+<button onclick="showGift()">🎁 Buka Hadiah</button>
+<div id="gift" style="display:none;margin-top:15px">
+🏆 Voucher Spesial:<br>
+🤗 1x Peluk Virtual<br>
+📱 Unlimited Chat<br>
+❤️ Lifetime Support
+</div>
+</div>
+</div></div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+
+function updateProgress(){
+document.getElementById('progress').style.width=((current)/(slides.length-1))*100+'%';
+}
+
+function startStory(){
+document.getElementById('bgm').play().catch(()=>{});
+next();
+}
+
+function next(){
+slides[current].classList.remove('active');
+current++;
+slides[current].classList.add('active');
+updateProgress();
+if(current===8) startTyping();
+}
+
+function correct(){ alert('✅ Nah gitu dong 😌'); next(); }
+
+const heart=document.getElementById('heartBtn');
+setInterval(()=>{
+if(current===2){
+heart.style.left=Math.random()*220+'px';
+heart.style.top=Math.random()*120+'px';
+}
+},700);
+
+function winGame(){
+alert('Yey! Kamu berhasil menangkap hatiku ❤️');
+next();
+}
+
+const msg=`Kalau suatu hari nanti kamu masih ragu, nggak apa-apa.
+
+Aku nggak akan maksa kamu buat percaya begitu saja.
+
+Aku cuma ingin kamu tahu kalau ada seseorang di sini yang benar-benar peduli sama kamu.
+
+Terima kasih sudah hadir dan memberi warna dalam hari-hariku.
+
+Tetap jadi Lia yang aku kenal ya. 🌷
+
+Dan kalau suatu hari nanti kamu siap membuka hati untuk percaya lagi, aku berharap aku masih jadi salah satu alasan yang membuat kamu berani mencobanya. ❤️`;
+
+function startTyping(){
+let i=0;
+const el=document.getElementById('typing');
+const t=setInterval(()=>{
+el.innerHTML=msg.substring(0,i).replace(/\n/g,'<br>');
+i++;
+if(i>msg.length){
+clearInterval(t);
+document.getElementById('thanks').style.display='block';
+confetti();
+}
+},35);
+}
+
+function showGift(){
+document.getElementById('gift').style.display='block';
+}
+
+for(let i=0;i<120;i++){
+let s=document.createElement('div');
+s.className='star';
+s.style.left=Math.random()*100+'vw';
+s.style.top=Math.random()*100+'vh';
+document.body.appendChild(s);
+}
+
+setInterval(()=>{
+let e=document.createElement('div');
+e.className='fall';
+e.innerHTML=Math.random()>0.5?'❤️':'🌸';
+e.style.left=Math.random()*100+'vw';
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),8000);
+},300);
+
+function confetti(){
+for(let i=0;i<80;i++){
+let e=document.createElement('div');
+e.className='fall';
+e.innerHTML='🎉';
+e.style.left=Math.random()*100+'vw';
+e.style.animationDuration='3s';
+document.body.appendChild(e);
+}
+}
+</script>
+</body>
+</html>
