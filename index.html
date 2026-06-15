@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🌷</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:'Segoe UI',sans-serif;
+overflow:hidden;
+background:linear-gradient(135deg,#6a85f1,#b884ff,#f7b6d2);
+color:white;
+}
+.slide{
+display:none;height:100vh;padding:20px;
+justify-content:center;align-items:center;flex-direction:column;
+text-align:center;
+animation:fade .7s;
+}
+.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.card{
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+padding:24px;border-radius:28px;
+max-width:850px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+.polaroid{
+background:#fff;color:#222;
+padding:12px;border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.polaroid img{width:260px;max-width:100%;border-radius:10px}
+button{
+border:none;border-radius:30px;
+padding:12px 22px;
+margin-top:14px;cursor:pointer;
+font-weight:bold;
+}
+.progress{
+position:fixed;top:0;left:0;height:5px;background:#fff;width:0%;z-index:99
+}
+.drop{
+position:fixed;
+top:-20px;
+pointer-events:none;
+animation:rain 6s linear forwards;
+opacity:.7;
+}
+@keyframes rain{to{transform:translateY(110vh);opacity:0}}
+#typing{line-height:1.8}
+</style>
+</head>
+<body>
+
+<div class="progress" id="bar"></div>
+
+<audio id="bgm" loop>
+<source src="foryou.mp3" type="audio/mpeg">
+</audio>
+
+<div class="slide active">
+<div class="card">
+<h1>Untuk kamu 🌷</h1>
+<br>
+<p>Sebuah album kecil yang aku buat khusus buat kamu.</p>
+<button onclick="next()">Buka Album ❤️</button>
+</div>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto1.jpg">
+<h3>🌷 Awal Cerita</h3><br>
+<p>Aku nggak pernah nyangka obrolan sederhana bisa membuatku mengenal seseorang yang menyenangkan seperti kamu.</p>
+</div>
+<button onclick="next()">Lanjut</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto2.jpg">
+<h3>🎉Tebak-Tebakan</h3><br>
+<p>Apa yang paling sering aku tunggu?</p>
+<button onclick="alert('❤️ Betul! Chat dari kamuuuuuuuuu')">📱 Chat dari Lia</button>
+<button onclick="alert('😭 Bukan itu')">🍜 Makan</button>
+<button onclick="alert('😭 Bukan itu')">😴 Tidur</button>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto3.jpg">
+<h3>✨ Hal Kecil</h3><br>
+<p>Kadang yang bikin hari terasa lebih baik bukan sesuatu yang besar, cukup notifikasi dari orang yang tepat.</p>
+</div>
+<button onclick="alert('Aku cuma mau bilang... makasih ya udah hadir 🌷')">Pencet Kalau Penasaran</button>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto4.jpg">
+<h3>❤️ Temukan Hati</h3><br>
+<p>Pilih yang benar ya 😭</p>
+<button onclick="alert('🌸 Itu bunga')">🌸</button>
+<button onclick="alert('🌙 Itu bulan')">🌙</button>
+<button onclick="alert('✨ Itu bintang')">✨</button>
+<button onclick="alert('❤️ Ketemu!')">❤️</button>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto5.jpg">
+<h3>💭 Sedikit masukan</h3><br>
+<p>
+Aku tahu percaya bukan hal yang mudah.<br><br>
+Aku juga nggak berharap kamu langsung percaya begitu saja.<br><br>
+Aku cuma berharap, seiring waktu, aku bisa menunjukkan semuanya lewat tindakan.
+</p>
+</div>
+<button onclick="next()">Next</button>
+</div>
+
+<div class="slide">
+<div class="polaroid">
+<img src="foto6.jpg">
+<h3>🌷 For Youu</h3><br>
+<p id="typing"></p>
+<div id="end" style="display:none">
+<br>
+<p>
+Terima kasih ya, Lia.<br><br>
+
+Kita memang belum lama kenal,
+tapi aku senang karena bisa mengenal kamu.<br><br>
+
+Mungkin masih banyak hal yang belum kita ketahui satu sama lain,
+dan masih banyak cerita yang belum sempat dibagikan.<br><br>
+
+Kalau hari ini terasa berat, jangan lupa istirahat.<br>
+Kalau ada hal yang membuat kamu lelah, jangan lupa memberi waktu untuk diri sendiri.<br><br>
+
+Dan kalau ada mimpi yang sedang kamu kejar, tetap semangat ya.<br>
+Pelan-pelan nggak apa-apa, yang penting jangan menyerah.<br><br>
+
+Aku harap hari-hari kamu dipenuhi banyak hal baik,
+lebih banyak senyum, dan lebih sedikit alasan untuk bersedih.<br><br>
+
+🌷❤️
+</p>
+<br>
+<button onclick="location.reload()">Putar Lagi</button>
+</div>
+</div>
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+
+function updateBar(){
+document.getElementById('bar').style.width=(current/(slides.length-1))*100+'%';
+}
+
+function next(){
+document.getElementById('bgm').play().catch(()=>{});
+slides[current].classList.remove('active');
+current++;
+slides[current].classList.add('active');
+updateBar();
+
+if(current===6) startTyping();
+}
+
+function startTyping(){
+const txt="Pesan terakhir untuk mbg (my bini gueh)";
+let i=0;
+const el=document.getElementById('typing');
+const t=setInterval(()=>{
+el.innerHTML=txt.substring(0,i);
+i++;
+if(i>txt.length){
+clearInterval(t);
+document.getElementById('end').style.display='block';
+}
+},80);
+}
+
+setInterval(()=>{
+let d=document.createElement('div');
+d.className='drop';
+d.innerHTML=Math.random()>0.5?'🌧️':'🌸';
+d.style.left=Math.random()*100+'vw';
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),6000);
+},250);
+
+document.addEventListener('click',()=>{
+document.getElementById('bgm').play().catch(()=>{});
+},{once:true});
+</script>
+</body>
+</html>
